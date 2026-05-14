@@ -3341,7 +3341,7 @@
 
                     // Set background image - use city.image if available, otherwise use default JAKARTA.png
                     const imageUrl = city.image || defaultImage;
-                    tile.style.backgroundImage = `url(${imageUrl})`;
+                    tile.style.backgroundImage = `url("${imageUrl}")`;
 
                     tile.innerHTML = inner;
                     board.appendChild(tile);
