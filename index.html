@@ -2795,7 +2795,7 @@
             <h2>Misi Saat Ini</h2>
             <p>Kunjungi kota berikutnya dan jawab pertanyaan musik Nusantara.</p>
             <div class="panel-metrics">
-                <div class="metric-row"><span>Progress</span><strong id="panel-progress">0 / 16 Kota</strong></div>
+                <div class="metric-row"><span>Progress</span><strong id="panel-progress">0 / 15 Kota</strong></div>
                 <div class="metric-row"><span>Skor</span><strong id="panel-score">0</strong></div>
             </div>
             <div class="panel-summary-grid">
@@ -3275,15 +3275,17 @@
             const totalCities = document.getElementById('total-cities');
             const correctCount = state.answers ? state.answers.filter(a => a.correct).length : 0;
             const wrongCount = state.answers ? state.answers.filter(a => !a.correct).length : 0;
+            const progressCities = Math.max(0, cityData.length - 1);
+            const visitedCities = Math.max(0, state.visited.size - 1);
 
             if (schoolElement) {
                 schoolElement.innerText = state.schoolName || 'Sekolah Nusantara';
             }
             if (visitedElement) {
-                visitedElement.innerText = `${state.visited.size} / ${cityData.length} Kota`;
+                visitedElement.innerText = `${visitedCities} / ${progressCities} Kota`;
             }
             if (panelProgress) {
-                panelProgress.innerText = `${state.visited.size} / ${cityData.length} Kota`;
+                panelProgress.innerText = `${visitedCities} / ${progressCities} Kota`;
             }
             if (scoreElement) {
                 scoreElement.innerText = state.score;
@@ -3298,7 +3300,7 @@
                 panelWrong.innerText = wrongCount;
             }
             if (totalCities) {
-                totalCities.innerText = cityData.length;
+                totalCities.innerText = progressCities;
             }
         }
 
