@@ -2884,9 +2884,7 @@
             <div class="cards-container">
                 <div class="card description-card" id="card-1">
                     <div class="card-title">Deskripsi Soal</div>
-                    <div class="card-content" id="desc-1">
-                        <img src="https://raw.githubusercontent.com/yursunrise25-coder/MEDIAAROV1/e1f8e32946105923da52bae757189b1b280717bc/ANGKLUNG%20HAL%201.png" alt="Angklung" class="center-image">
-                    </div>
+                    <div class="card-content" id="desc-1"></div>
                 </div>
                 <div class="card description-card" id="card-2">
                     <div class="card-title">Deskripsi Soal</div>
@@ -3982,6 +3980,7 @@
                 `Tantangan musik ini akan menguji pengetahuan Anda tentang alat musik dan genre musik dari ${cityData[state.idx].name}.`
             ];
 
+            document.getElementById('desc-1').innerText = descriptions[0];
             document.getElementById('desc-2').innerText = descriptions[1];
 
             // Kartu soal 1
