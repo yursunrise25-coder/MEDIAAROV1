@@ -3337,7 +3337,7 @@
                     tile.dataset.index = i;
                     tile.style.gridRow = gridCoords[i][0];
                     tile.style.gridColumn = gridCoords[i][1];
-                    let inner = `<span style="z-index: 10;">${city.name}</span>`;
+                    let inner = ``;
 
                     // Set background image - use city.image if available, otherwise use default JAKARTA.png
                     const imageUrl = city.image || defaultImage;
@@ -3410,9 +3410,7 @@
                     centerImageEl.style.opacity = '1';
                 }, 200);
             }
-            if (centerTitleEl) {
-                centerTitleEl.innerText = cityData[state.idx].name;
-            }
+            // center title text intentionally left blank to hide region name
             
             document.querySelectorAll('.tile').forEach(t => t.style.boxShadow = '');
             const currentTile = document.getElementById(`tile-${state.idx}`);
