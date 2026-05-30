@@ -3973,37 +3973,78 @@
                 return;
             }
 
-            // Isi kartu deskripsi (contoh deskripsi umum tentang musik daerah)
-            const descriptions = [
-                `Musik tradisional ${cityData[state.idx].name} memiliki ciri khas yang unik dan kaya akan sejarah budaya Indonesia.`,
-                `Tantangan musik ini akan menguji pengetahuan Anda tentang alat musik dan genre musik dari ${cityData[state.idx].name}.`
-            ];
+            let desc1HTML = `Musik tradisional ${cityData[state.idx].name} memiliki ciri khas yang unik dan kaya akan sejarah budaya Indonesia.`;
+            let desc2HTML = `Tantangan musik ini akan menguji pengetahuan Anda tentang alat musik dan genre musik dari ${cityData[state.idx].name}.`;
+            let card3Title = 'Soal 1';
+            let card4Title = 'Soal 2';
+            let card3HTML = quiz1.q;
+            let card4HTML = quiz2.q;
+            let card3Options = quiz1.a;
+            let card3Correct = quiz1.correct;
+            let card4Options = quiz2.a;
+            let card4Correct = quiz2.correct;
 
-            document.getElementById('desc-1').innerText = descriptions[0];
-            document.getElementById('desc-2').innerText = descriptions[1];
+            if (state.idx === 1) {
+                document.querySelector('#card-1 .card-title').innerText = 'Angklung (Jawa Barat)';
+                desc1HTML = `
+                    <img src="https://raw.githubusercontent.com/yursunrise25-coder/MEDIAAROV1/6d5c189745d78f0d32c2c021fd16b4d4d02b77b3/B.1%20ANGKLUNG%20(1).png" alt="Angklung" style="width: 100%; border-radius: 12px; margin-bottom: 12px;">
+                    <p><strong>Angklung</strong> adalah alat musik bambu yang dimainkan dengan cara diguncang sehingga tabung-tabungnya bergetar dan menghasilkan bunyi. Getaran bambu memicu resonansi kolom udara di dalam tabung, menghasilkan frekuensi tertentu (±200–2.000 Hz) sesuai ukuran tabung. Secara fisika, angklung menunjukkan konsep gelombang bunyi, resonansi, frekuensi alami, dan superposisi gelombang. Bunyi yang dihasilkan berkisar sedang hingga keras (±70-90 dB) dan semakin kuat saat dimainkan dalam ansambel (UNESCO ICH, 2010; Kunst, 1973).</p>
+                `;
+                document.querySelector('#card-2 .card-title').innerText = 'Angklung: Proportional reasoning';
+                desc2HTML = `
+                    <img src="https://raw.githubusercontent.com/yursunrise25-coder/MEDIAAROV1/6d5c189745d78f0d32c2c021fd16b4d4d02b77b3/B.2%20ANGKLUNG.png" alt="Angklung" style="width: 100%; border-radius: 12px; margin-bottom: 12px;">
+                    <p>Dalam sebuah pertunjukan seni di sekolah, siswa A memainkan angklung A, sedangkan siswa B memainkan angklung B. Angklung merupakan alat musik dari bambu yang menghasilkan bunyi karena getaran tabung bambu dan resonansi udara di dalamnya. Dalam fisika, bunyi pada tabung angklung dapat dimodelkan seperti pipa organa tertutup (satu ujung tertutup).</p>
+                    <p>Seorang siswa menebak:</p>
+                    <blockquote>“Frekuensi nada dasar A lebih kecil daripada angklung B”</blockquote>
+                `;
+                card3Title = 'Angklung Tier 1: Proportional reasoning, memahami hubungan berbanding terbalik';
+                card3HTML = `
+                    <img src="https://raw.githubusercontent.com/yursunrise25-coder/MEDIAAROV1/6d5c189745d78f0d32c2c021fd16b4d4d02b77b3/B.2%20ANGKLUNG.png" alt="Angklung Tier 1" style="width: 100%; border-radius: 12px; margin-bottom: 12px;">
+                    <p>Perbandingan frekuensi nada dasar angklung A dan B (fa : fb) adalah …</p>
+                `;
+                card3Options = ['A. 3:4', 'B. 4:3', 'C. 1:1', 'D. 2:1', 'E. 1:2'];
+                card3Correct = 0;
+                card4Title = 'Angklung Tier 2: Proportional reasoning, memahami hubungan berbanding terbalik';
+                card4HTML = `
+                    <img src="https://raw.githubusercontent.com/yursunrise25-coder/MEDIAAROV1/6d5c189745d78f0d32c2c021fd16b4d4d02b77b3/B.2%20ANGKLUNG.png" alt="Angklung Tier 2" style="width: 100%; border-radius: 12px; margin-bottom: 12px;">
+                    <p>Pernyataan siswa tersebut adalah …</p>
+                `;
+                card4Options = [
+                    'A. benar, karena frekuensi nada dasar berbanding terbalik dengan panjang kolom udara',
+                    'B. benar, karena panjang tabung menentukan amplitudo bunyi',
+                    'C. salah, karena frekuensi berbanding lurus dengan panjang kolom udara',
+                    'D. salah, karena jumlah tabung menentukan frekuensi',
+                    'E. salah, karena massa bambu menentukan frekuensi'
+                ];
+                card4Correct = 0;
+            } else {
+                document.querySelector('#card-1 .card-title').innerText = 'Deskripsi Soal';
+                document.querySelector('#card-2 .card-title').innerText = 'Deskripsi Soal';
+            }
 
-            // Kartu soal 1
-            document.getElementById('question-card-3').innerText = quiz1.q;
+            document.getElementById('desc-1').innerHTML = desc1HTML;
+            document.getElementById('desc-2').innerHTML = desc2HTML;
+
+            document.getElementById('question-card-3').innerHTML = card3HTML;
             const options3 = document.getElementById('options-3');
             options3.innerHTML = '';
-            quiz1.a.forEach((opt, idx) => {
+            card3Options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'quiz-opt-btn';
                 btn.innerText = opt;
-                btn.onclick = () => checkCardAnswer(3, idx === quiz1.correct);
+                btn.onclick = () => checkCardAnswer(3, idx === card3Correct);
                 options3.appendChild(btn);
             });
 
-            // Kartu soal 2: tampil normal, tetapi baru bisa dijawab setelah kartu 3 selesai
-            document.getElementById('question-card-4').innerText = quiz2.q;
+            document.getElementById('question-card-4').innerHTML = card4HTML;
             const options4 = document.getElementById('options-4');
             options4.innerHTML = '';
-            quiz2.a.forEach((opt, idx) => {
+            card4Options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'quiz-opt-btn';
                 btn.innerText = opt;
                 btn.disabled = true;
-                btn.onclick = () => checkCardAnswer(4, idx === quiz2.correct);
+                btn.onclick = () => checkCardAnswer(4, idx === card4Correct);
                 options4.appendChild(btn);
             });
 
